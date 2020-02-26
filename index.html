@@ -19,15 +19,54 @@
         <div class="card-body">
           <textarea
             readonly
-            id="password"
+            id="result"
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
         </div>
         <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+        <label>Password length</label>
+        <input type="number" id="length" min='8' max='128' value='20' />
         </div>
+
+        <div class="setting">
+          <label>Include Uppercase letters</label> 
+          <input type="checkbox" id="upp" checked />
+        </div>
+        
+        <div class="setting">
+          <label>Include Lowercase letters</label> 
+          <input type="checkbox" id="low" checked />
+        </div>
+        
+        <div class="setting">
+          <label>Include Numbers</label> 
+          <input type="checkbox" id="num" checked />
+        </div>
+        
+        <div class="setting">
+          <label>Include Special Characters</label> 
+          <input type="checkbox" id="spec" checked />
+        </div>
+        
+       <div class="setting">
+        <label>Include Han Chinese</label> 
+        <input type="checkbox" id="han" checked />
+       </div>
+       
+       <div class="setting">
+       <label>Include Tibetan Letters</label> 
+       <input type="checkbox" id="tib" checked />
+       </div>
+     
+       <div class="setting">
+       <label>Include Devangari</label> 
+       <input type="checkbox" id="dev" checked />
+       </div>
+      
+       <button id="generate" class="btn">Generate Password</button>
       </div>
+      
     </div>
     <script src="script3.js"></script>
   </body>

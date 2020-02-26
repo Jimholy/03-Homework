@@ -1,46 +1,104 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+// var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-//function writePassword() {wer
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+// // Write password to the #password input
+// //function writePassword() {wer
+//   var password = generatePassword();
+//   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+//   passwordText.value = password;
 
   
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// // Add event listener to generate button
+// generateBtn.addEventListener("click", writePassword);
 // if no getLow, getUpp, getNum, getSpec, getHan, getTib, and getDev. 
 
-//Use random number gen to get a character from the functions and have lots if statements
+const resultEl = document.getElementById('result');
+const lengthEl = document.getElementById('length');
+const lowEl = document.getElementById('low');
+const uppEl = document.getElementById('upp');
+const numEl = document.getElementById('num');
+const specEl = document.getElementById('spec');
+const hanEl = document.getElementById('han');
+const tibEl = document.getElementById('tib');
+const devEl = document.getElementById('dev');
+const generateEl = document.getElementById('generate');
 
-  
+const randomFunc = {
+  low: getLow,
+  upp: getUpp,
+  num: getNum,
+  spec: getSpec,
+  han: getHan,
+  tib: getTib,
+  dev: getDev
+}
+
+//Use random number gen to get a character from the functions and have lots if statements
+generateEl.addEventListener('click', () => {
+  const length = +lengthEl.value;
+	const hasLow = lowEl.checked;
+	const hasUpp = uppEl.checked;
+	const hasNum = numEl.checked;
+  const hasSpec = specEl.checked;
+  const hasHan = hanEl.checked;
+  const hasTib = tibEl.checked;
+  const hasDev = devEl.checked
+resultEl.innerText = generatePassword (hasLow, hasUpp, hasNum, hasSpec, hasHan, hasTib, hasDev, length)
+});
+
+function generatePassword(low, upp, num, sym, han, tib, dev, length) {
+	let generatedPassword = '';
+	const typesCount = low + upp + num + sym + han + tib + dev;
+  const typesArr = [{low}, {upp}, {num}, {spec} ,{han}, {tib}, {dev}]
+  .filter(item => Object.values(item)[0]);
+	
+	// Doesn't have a selected type
+	if(typesCount === 0) {
+		return '';
+	}
+	
+	// create a loop
+	for(let i=0; i<length; i+= typesCount) {
+		typesArr.forEach(type => {
+			const funcName = Object.keys(type)[0];
+			generatedPassword += randomFunc[funcName]();
+		});
+	}
+	
+	const finalPassword = generatedPassword.slice(0, length);
+	
+	return finalPassword;
+}
+
+
+
+// FUNCTIONS FOR GETTING RANDOM CHARACTERS
 function getLow() {
-    var lowArray = "abcdefghijklmnopqrstuvwxyz";
-    return lowArray[Math.floor(Math.random() * lowArray.length)]
+  var lowArray = "abcdefghijklmnopqrstuvwxyz";
+  return lowArray[Math.floor(Math.random() * lowArray.length)]
     
 };
 
 function getUpp() {
   var uppArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  console.log(uppArray[Math.floor(Math.random() * uppArray.length)])
+  return uppArray[Math.floor(Math.random() * uppArray.length)]
   
 };
-getUpp();
+// getUpp();
 
 function getNum() {
   var numArray = "1234567890";
-  console.log(numArray[Math.floor(Math.random() * numArray.length)])
+  return numArray[Math.floor(Math.random() * numArray.length)]
   
 };
-getNum();
+// getNum();
 
 function getSpec() {
   var specArray = "!@#$%^&*()'*'";
-  console.log(specArray[Math.floor(Math.random() * specArray.length)])
+  return specArray[Math.floor(Math.random() * specArray.length)]
 };
-getSpec();
+// getSpec();
 
 function getHan(){
   var hanArray =  "斡晦魄環照劍號巨闕珠稱夜光墨悲絲染詩讚羔羊升階納陛弁轉疑星貽厥嘉猷勉";
@@ -49,45 +107,14 @@ function getHan(){
 
 function getTib(){
   var tibArray =  "ཅཏཔཙཞརཧཆཐཕཚཟལཇདབཛའཤཉནམཝཡསཀ";
-  console.log(tibArray[Math.floor(Math.random() * tibArray.length)])
+  return tibArray[Math.floor(Math.random() * tibArray.length)]
 };
-getTib();
+// getTib();
 
 function getDev(){
   var devArray =  "कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह";
-  console.log(devArray[Math.floor(Math.random() * devArray.length)])
+  return devArray[Math.floor(Math.random() * devArray.length)] 
 };
-getDev();
+// getDev();
 
 
-
-
-
-
-//finish writing the remaing arrays
-//
-
-// test every thingy, we use
-//    String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//    String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-//    String specialCharacters = "!@#$"()*:"{}';
-//    String numbers = "1234567890";
-//    String glyphs ="天地玄黃宇宙洪荒蓋此身髮四大五常都邑華夏東西二京治本於侬廉退顛沛匪虧曠遠綿邈岩岫杳冥性靜情逸心動神疲"
-
-//    String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers +glyphs;
-      
-/// console.log(Math.floor(Math.random() * 10))
-      //random number generator 0-4 (variables)
-      //random number generator
-        // string.length for the flexible choices within the length
-        // += to combine the characters  
-
-//  for(int i = 4; i< length ; i++) 
-//    password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
-//  } return password;}}
-
-// alert ("Your password must contain at least  special character, uppercase, lowercase, number and three non-latin characters.");
-
-// var arr = ["abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "1234567890","!@#$%^&*()'*'" ,"本於侬廉退顛沛匪虧曠遠綿邈岩岫杳冥性靜情逸心動神疲", "ཅཏཔཙཞརཧཆཐཕཚཟལཇདབཛའཤཉནམཝཡསཀ","कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह"]
-
-//  console.log(Math.floor(Math.random() * nameArray.length))

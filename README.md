@@ -1,1 +1,1 @@
-This homwework is very incomplete take pity on my soul
+Finished it although it could use a polish, the order in which the characters appear is not truly random 
